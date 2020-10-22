@@ -1,8 +1,10 @@
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
+const app = express();
 
 const PORT = process.env.PORT || 3000;
+
+const workoutController = require("./controllers/workoutController.js")
 
 // Express Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -35,6 +37,8 @@ app.get("/api/config", (req, res) => {
     success: true,
   });
 });
+
+app.use(workoutController);
 
 // Server Listener
 app.listen(PORT, () => {
