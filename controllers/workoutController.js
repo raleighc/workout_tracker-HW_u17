@@ -10,6 +10,26 @@ router.get("/api/workouts", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+      res.json({
+        error: true,
+        data: null,
+        message: "Failed to retrieve workout."
+      })
+    });
+});
+
+router.get("/api/workouts/:id", (req, res) => {
+  db.Workout.findById(req.params.id)
+    .then((foundWorkout) => {
+      res.json(foundWorkout);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json({
+        error: true,
+        data: null,
+        message: `Failed to retrieve workout with id: ${req.params.id}`,
+      });
     });
 });
 
@@ -20,6 +40,11 @@ router.post("/api/workouts", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+      res.json({
+        error: true,
+        data: null,
+        message: "Failed to create new workout."
+      })
     });
 });
 
