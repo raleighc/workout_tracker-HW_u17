@@ -5,6 +5,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const workoutController = require("./controllers/workoutController.js")
+const htmlController = require("./controllers/htmlController.js")
 
 // Express Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -38,6 +39,7 @@ app.get("/api/config", (req, res) => {
   });
 });
 
+app.use(htmlController);
 app.use(workoutController);
 
 // Server Listener
