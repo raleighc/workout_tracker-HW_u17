@@ -8,6 +8,7 @@ router.get("/api/workouts", (req, res) => {
   db.Workout.find({})
     .then((foundWorkouts) => {
       res.json(foundWorkouts);
+      console.log(foundWorkouts)
     })
     .catch((err) => {
       console.log(err);
@@ -19,35 +20,35 @@ router.get("/api/workouts", (req, res) => {
     });
 });
 
-router.get("/api/workouts/:id", (req, res) => {
-  db.Workout.findById(req.params.id)
-    .then((foundWorkout) => {
-      res.json(foundWorkout);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.json({
-        error: true,
-        data: null,
-        message: `Failed to retrieve workout with id: ${req.params.id}`,
-      });
-    });
-});
+// router.get("/api/workouts/:id", (req, res) => {
+//   db.Workout.findById(req.params.id)
+//     .then((foundWorkout) => {
+//       res.json(foundWorkout);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.json({
+//         error: true,
+//         data: null,
+//         message: `Failed to retrieve workout with id: ${req.params.id}`,
+//       });
+//     });
+// });
 
-router.get("/api/exercises/", (req, res) => {
-  db.Exercise.find({})
-    .then((foundExercises) => {
-      res.json(foundExercises);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.json({
-        error: true,
-        data: null,
-        message: "Failed to retrieve exercises."
-      })
-    });
-});
+// router.get("/api/exercises/", (req, res) => {
+//   db.Exercise.find({})
+//     .then((foundExercises) => {
+//       res.json(foundExercises);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.json({
+//         error: true,
+//         data: null,
+//         message: "Failed to retrieve exercises."
+//       })
+//     });
+// });
 
 router.get("/api/workouts/range", (req, res) => {
   db.Workout.find({})
@@ -87,8 +88,8 @@ router.put("/api/workouts/:id", (req, res) => {
     req.params.id,
     { $push: { exercises: req.body } }, 
      { new: true })
-    .then((updatedExcercise) => {
-      res.json(updatedExcercise);
+    .then((updatedExercise) => {
+      res.json(updatedExercise);
     })
     .catch((err) => {
       console.log(err);
@@ -101,19 +102,19 @@ router.put("/api/workouts/:id", (req, res) => {
 });
 
 // DELETE Routes
-router.delete("/api/workouts/:id", (req, res) => {
-  db.Workout.findByIdAndDelete(req.params.id)
-    .then((deletedWorkout) => {
-      res.json(deletedWorkout);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.json({
-        error: true,
-        data: null,
-        message: "Failed to delete workout.",
-      });
-    });
-});
+// router.delete("/api/workouts/:id", (req, res) => {
+//   db.Workout.findByIdAndDelete(req.params.id)
+//     .then((deletedWorkout) => {
+//       res.json(deletedWorkout);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//       res.json({
+//         error: true,
+//         data: null,
+//         message: "Failed to delete workout.",
+//       });
+//     });
+// });
 
 module.exports = router;
